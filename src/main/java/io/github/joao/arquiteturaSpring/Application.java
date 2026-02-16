@@ -1,0 +1,40 @@
+package io.github.joao.arquiteturaSpring;
+
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+//		SpringApplication.run(Application.class, args);
+
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class);
+
+		// Disable the banner that is displayed when the application starts
+		builder.bannerMode(Banner.Mode.OFF);
+
+		// Set the active profile to "production")
+		// You can specify multiple profiles by separating them with commas, e.g., "production,homologation"
+		builder.profiles("production", "homologation");
+
+		// Additional configuration can be done here if needed, passed as arguments to the builder
+		// Example: builder.properties("spring.config.name=custom-config");
+		builder.run(args);
+
+		ConfigurableApplicationContext applicationContext = builder.context();
+//		var productRepository = applicationContext.getBean("productRepository");
+
+
+		ConfigurableEnvironment environment = applicationContext.getEnvironment();
+		System.out.println("Application name: " + environment.getProperty("spring.application.name"));
+
+
+	}
+
+}
