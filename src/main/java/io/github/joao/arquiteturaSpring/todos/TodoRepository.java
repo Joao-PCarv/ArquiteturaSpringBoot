@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // The first generic parameter, TodoEntity, specifies the type of the entity that this repository manages, while the second parameter
 // specifies the type of the entity's primary key, which in this case is Integer.
 public interface TodoRepository extends JpaRepository<TodoEntity, Integer> {
+
+    boolean existsByDescricao(String descricao);
 }
